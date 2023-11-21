@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.DualShock;
 using UnityEngine.InputSystem.Haptics;
 
 namespace VibrationController {
@@ -83,7 +85,27 @@ namespace VibrationController {
             yield return new WaitForSecondsRealtime(time);
             gamepad.SetMotorSpeeds(0f, 0f);
         }
-        
+
+        /// <summary>
+        /// Method to Set Color of LightBar on DualShock Gamepad
+        /// </summary>
+        /// <param name="color"> Color we want to set on the gamepad lightbar </param>
+        public void SetLightBarColor(Color color) {
+            var dualShockGamepads = Gamepad.all.Where(gamepad => gamepad is DualShockGamepad).Cast<DualShockGamepad>();
+            foreach (DualShockGamepad dualShock in dualShockGamepads) {
+                SetLightBarColorTo(dualShock, color);
+            }
+        }
+
+        /// <summary>
+        /// Helper to Set Color of LightBar
+        /// </summary>
+        /// <param name="gamepad"> The DualShock object we want to change color </param>
+        /// <param name="color"> Color we want to set on the gamepad lightbar </param>
+        private void SetLightBarColorTo(IDualShockHaptics gamepad, Color color) {
+            gamepad.SetLightBarColor(color);
+        }
+
         private void OnDeviceChange(InputDevice device, InputDeviceChange change) {
             if (device is not Gamepad gamepad) {
                 return;
