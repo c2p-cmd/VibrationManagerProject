@@ -1,6 +1,10 @@
 # Vibration Manager Project
 This Project is a demo for the Vibration Manager
 
+## Installation:
+
+Go to [releases](https://github.com/c2p-cmd/VibrationManagerProject/releases) find the latest one and download the '.unitypackage' file and open that with your Unity Project 
+
 ## Demo:
 
 ### Vibration Method:
